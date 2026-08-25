@@ -27,5 +27,8 @@ access-token
 *.jpeg
 *.png
 
+# Curated documentation artwork is safe to publish.
+!docs/images/*.png
+
 # Keep empty fixture directories available through their README files.
 !benchmarks/fixtures/**/README.md
