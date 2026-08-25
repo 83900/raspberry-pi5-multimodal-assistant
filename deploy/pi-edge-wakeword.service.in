@@ -1,0 +1,18 @@
+[Unit]
+Description=Pi Edge Assistant bilingual wake-word bridge
+After=pi-edge-assistant.service
+Requires=pi-edge-assistant.service
+
+[Service]
+Type=simple
+WorkingDirectory=@PROJECT_DIR@
+EnvironmentFile=%h/.config/pi-edge-assistant/edge-assistant.env
+ExecStart=/bin/bash @PROJECT_DIR@/scripts/run_wakeword.sh
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+
+[Install]
+WantedBy=default.target

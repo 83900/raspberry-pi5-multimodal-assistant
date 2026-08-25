@@ -1,0 +1,31 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Runtime data and generated reports
+data/
+audit/
+backups/
+results/
+*.db
+access-token
+
+# Models and real session media must never enter Git
+*.gguf
+*.bin
+*.onnx
+*.onnx.json
+*.wav
+*.mp3
+*.jpg
+*.jpeg
+*.png
+
+# Keep empty fixture directories available through their README files.
+!benchmarks/fixtures/**/README.md

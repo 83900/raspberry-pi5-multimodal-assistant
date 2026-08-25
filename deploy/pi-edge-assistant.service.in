@@ -1,0 +1,20 @@
+[Unit]
+Description=Raspberry Pi Local Multimodal Assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@PROJECT_DIR@
+EnvironmentFile=%h/.config/pi-edge-assistant/edge-assistant.env
+ExecStart=@PROJECT_DIR@/.venv/bin/pi-edge-assistant
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/pi-edge-assistant /run/user/%U/pi-edge-assistant
+
+[Install]
+WantedBy=default.target

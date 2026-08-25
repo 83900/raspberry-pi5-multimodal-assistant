@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pi Edge Assistant</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2363e6a8'/%3E%3Cpath d='M19 18h18c9 0 14 5 14 13s-5 13-14 13H29v10H19zm10 8v10h8c3 0 5-2 5-5s-2-5-5-5z' fill='%2307100d'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">RASPBERRY PI 5 · LOCAL FIRST</p>
+        <h1>Pi Edge Assistant</h1>
+        <p class="subtitle">本地双语语音与视觉助手</p>
+      </div>
+      <span id="state" class="state idle">IDLE</span>
+    </header>
+
+    <section id="login" class="card login-card">
+      <h2>连接设备</h2>
+      <p>输入树莓派 <code>data/access-token</code> 中的访问口令。</p>
+      <form id="login-form" class="row">
+        <input type="text" name="username" value="pi-edge-assistant" autocomplete="username" hidden>
+        <input id="token" type="password" autocomplete="current-password" placeholder="Access token">
+        <button id="connect" type="submit">连接</button>
+      </form>
+      <p id="login-error" class="error"></p>
+    </section>
+
+    <div id="workspace" class="workspace hidden">
+      <section class="card interaction">
+        <div class="toolbar">
+          <label class="switch-label"><input id="include-image" type="checkbox"> 附带当前画面</label>
+          <label class="switch-label"><input id="compare-model" type="checkbox"> 4B 对照</label>
+        </div>
+        <div class="record-row">
+          <button id="record" class="record-button">开始说话</button>
+          <button id="stop-playback" class="secondary">停止播报</button>
+          <button id="browser-playback" class="secondary" disabled>浏览器播放</button>
+        </div>
+        <form id="chat-form" class="chat-form">
+          <textarea id="text" rows="3" placeholder="输入中文或 English，也可以说“看看画面”触发摄像头…"></textarea>
+          <button type="submit">发送</button>
+        </form>
+        <p id="notice" class="notice"></p>
+      </section>
+
+      <section class="grid">
+        <article class="card result-card">
+          <span class="label">TRANSCRIPT / 输入</span>
+          <p id="transcript" class="result">—</p>
+        </article>
+        <article class="card result-card">
+          <span class="label">RESPONSE / 回复</span>
+          <p id="response" class="result">—</p>
+        </article>
+      </section>
+
+      <section class="grid lower-grid">
+        <article class="card camera-card">
+          <div class="section-title"><span>当前画面</span><span class="muted">仅保留在浏览器内存</span></div>
+          <div class="image-frame"><img id="image" alt="Last camera capture"><span id="image-placeholder">No capture</span></div>
+        </article>
+        <article class="card metrics-card">
+          <div class="section-title"><span>设备状态</span><span id="model" class="muted">—</span></div>
+          <dl id="metrics"></dl>
+          <div id="timings" class="timings"></div>
+        </article>
+      </section>
+
+      <section class="card history-card">
+        <div class="section-title">
+          <span>本地文本历史</span>
+          <button id="clear-history" class="danger">清空</button>
+        </div>
+        <div id="history" class="history-list"></div>
+      </section>
+    </div>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

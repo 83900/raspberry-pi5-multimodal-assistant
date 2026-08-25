@@ -1,0 +1,3 @@
+{"id":"zh-text-01","text":"用两句话说明你是什么助手","language":"zh"}
+{"id":"en-text-01","text":"Explain your role in two sentences.","language":"en"}
+{"id":"vision-01","text":"描述图中可见的物体，不确定时请明确说明。","language":"zh","image":"fixtures/images/vision-01.jpg"}

@@ -1,0 +1,3 @@
+{"audio":"fixtures/audio/zh-01.wav","text":"请告诉我今天的设备状态","language":"zh","slots":["设备状态"]}
+{"audio":"fixtures/audio/en-01.wav","text":"Tell me the current device status","language":"en","slots":["device status"]}
+{"audio":"fixtures/audio/mixed-01.wav","text":"看看 camera 里有什么","language":"mixed","slots":["camera"]}
