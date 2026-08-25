@@ -62,16 +62,7 @@
 
 ## 二、整体架构
 
-```text
-网页按钮 / 文字输入
-        │
-        ├── USB 麦克风 ── whisper.cpp ──┐
-        │                                │
-        └── 明确视觉口令 ── Picamera2 ──┼── Ollama + Qwen 3.5
-                                         │
-                                         ├── Piper 中英 TTS
-                                         └── 网页 + SQLite 指标历史
-```
+![树莓派 5 本地多模态 AI 助手架构](images/architecture-overview.png)
 
 状态机固定为：
 
