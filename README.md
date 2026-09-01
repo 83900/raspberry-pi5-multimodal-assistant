@@ -379,6 +379,54 @@ http://树莓派IP:8080
 
 ---
 
+## 可选：微雪 4.3 英寸 DSI 触摸屏 kiosk
+
+适用于已经能正常显示和触控的横向 800×480 `4.3inch DSI LCD/QLED`。安装器不会修改 DSI overlay、旋转、触控映射、摄像头、模型、swap 或风扇配置。
+
+```bash
+cd ~/pi-edge-assistant
+./scripts/install_kiosk.sh
+sudo reboot
+```
+
+安装器会：
+
+- 检查当前显示输出和触控设备，仅输出诊断信息。
+- 复用现有 Chromium；只有浏览器不存在时才执行 `apt update` 并安装对应 Chromium 包，不执行 `apt upgrade`。
+- 设置当前用户的 Raspberry Pi OS 桌面自动登录。
+- 在图形会话中自动打开 `http://127.0.0.1:8080/?display=1`。
+- 使用独立浏览器 profile、单实例锁和崩溃重启循环。
+- 在触摸模式申请 Screen Wake Lock；X11 环境同时关闭 DPMS。
+
+触摸界面使用底部三页签：
+
+- **助手**：录音、附带画面、4B 对照、停止播报、折叠文字输入、转写和回复。
+- **画面 / 状态**：最后照片、模型、温度、内存、swap、磁盘和阶段耗时。
+- **历史**：最近 30 条文本记录和清空历史。
+
+本机 kiosk 通过回环地址取得临时 display token，不读取或保存主访问口令；临时 token 离开回环连接后无效。局域网普通网页仍需原访问口令。
+
+SSH 运维命令：
+
+```bash
+./scripts/kiosk_control.sh status
+./scripts/kiosk_control.sh pause
+./scripts/kiosk_control.sh resume
+./scripts/kiosk_control.sh restart
+./scripts/kiosk_control.sh logs
+```
+
+暂停或重启 Chromium 不会停止 FastAPI、Ollama 或局域网页面。若启动后没有自动全屏，先检查：
+
+```bash
+curl http://127.0.0.1:8080/api/health
+systemctl --user status pi-edge-assistant --no-pager
+./scripts/kiosk_control.sh status
+./scripts/kiosk_control.sh logs
+```
+
+---
+
 ## Step 11：验证 API
 
 ```bash
@@ -392,6 +440,8 @@ curl -X POST http://127.0.0.1:8080/api/chat \
 
 | 方法 | 路径 | 用途 |
 |---|---|---|
+| `GET` | `/api/health` | 仅返回服务存活状态，无需鉴权 |
+| `POST` | `/api/display/session` | 仅允许回环来源创建临时屏幕会话 |
 | `POST` | `/api/recording/start` | 开始树莓派麦克风录音 |
 | `POST` | `/api/recording/stop` | 停止录音并异步处理 |
 | `POST` | `/api/chat` | 文本问答，可指定图像或 4B 对照 |
@@ -402,7 +452,7 @@ curl -X POST http://127.0.0.1:8080/api/chat \
 | `POST` | `/api/playback/stop` | 停止本机播报 |
 | `WS` | `/api/events` | 状态、转写、照片、回复、音频和错误事件 |
 
-除了静态首页，所有 `/api/*` 请求都需要访问口令。WebSocket 连接后的第一条 JSON 消息也必须发送 token。
+除健康检查和仅限回环的显示会话外，所有 `/api/*` 请求都需要访问口令。WebSocket 连接后的第一条 JSON 消息也必须发送 token。
 
 ---
 

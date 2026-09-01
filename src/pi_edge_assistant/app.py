@@ -3,11 +3,12 @@ from __future__ import annotations
 import logging
 import secrets
 import asyncio
+import ipaddress
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 import uvicorn
-from fastapi import FastAPI, Header, HTTPException, Query, WebSocket, WebSocketDisconnect, status
+from fastapi import FastAPI, Header, HTTPException, Query, Request, WebSocket, WebSocketDisconnect, status
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -54,6 +55,7 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
     settings = settings or Settings.from_env()
     settings.prepare()
     access_token = settings.resolve_access_token()
+    display_token = secrets.token_urlsafe(24)
     orchestrator = orchestrator or build_orchestrator(settings)
 
     @asynccontextmanager
@@ -63,38 +65,70 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         await orchestrator.shutdown()
         orchestrator.history.close()
 
-    app = FastAPI(title="Pi Edge Assistant", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="Pi Edge Assistant", version="0.2.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.orchestrator = orchestrator
 
-    def authorize(x_access_token: str | None = Header(default=None)) -> None:
-        if not x_access_token or not secrets.compare_digest(x_access_token, access_token):
+    def is_loopback(host: str | None) -> bool:
+        if not host:
+            return False
+        try:
+            address = ipaddress.ip_address(host)
+        except ValueError:
+            return False
+        if address.is_loopback:
+            return True
+        return bool(getattr(address, "ipv4_mapped", None) and address.ipv4_mapped.is_loopback)
+
+    def token_is_authorized(supplied_token: str | None, client_host: str | None) -> bool:
+        if not supplied_token:
+            return False
+        if secrets.compare_digest(supplied_token, access_token):
+            return True
+        return is_loopback(client_host) and secrets.compare_digest(supplied_token, display_token)
+
+    def authorize(request: Request, supplied_token: str | None) -> None:
+        client_host = request.client.host if request.client else None
+        if not token_is_authorized(supplied_token, client_host):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid access token")
 
+    @app.get("/api/health")
+    async def health() -> dict[str, str]:
+        return {"status": "ok"}
+
+    @app.post("/api/display/session")
+    async def create_display_session(request: Request) -> dict[str, str]:
+        client_host = request.client.host if request.client else None
+        if not is_loopback(client_host):
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="display sessions require loopback")
+        return {"token": display_token}
+
     @app.get("/api/status")
-    async def get_status(x_access_token: str | None = Header(default=None)):
-        authorize(x_access_token)
+    async def get_status(request: Request, x_access_token: str | None = Header(default=None)):
+        authorize(request, x_access_token)
         return await orchestrator.refresh_metrics()
 
     @app.get("/api/history")
     async def get_history(
+        request: Request,
         limit: int = Query(default=100, ge=1, le=500),
         x_access_token: str | None = Header(default=None),
     ):
-        authorize(x_access_token)
+        authorize(request, x_access_token)
         return orchestrator.history.list(limit)
 
     @app.delete("/api/history", status_code=status.HTTP_204_NO_CONTENT)
-    async def clear_history(x_access_token: str | None = Header(default=None)) -> None:
-        authorize(x_access_token)
+    async def clear_history(request: Request, x_access_token: str | None = Header(default=None)) -> None:
+        authorize(request, x_access_token)
         orchestrator.history.clear()
 
     @app.post("/api/recording/start", response_model=AcceptedJob, status_code=status.HTTP_202_ACCEPTED)
     async def start_recording(
+        http_request: Request,
         request: RecordingStartRequest,
         x_access_token: str | None = Header(default=None),
     ) -> AcceptedJob:
-        authorize(x_access_token)
+        authorize(http_request, x_access_token)
         try:
             job_id = await orchestrator.start_recording(request.include_image)
         except BusyError as exc:
@@ -104,8 +138,8 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         return AcceptedJob(job_id=job_id)
 
     @app.post("/api/recording/stop", response_model=AcceptedJob, status_code=status.HTTP_202_ACCEPTED)
-    async def stop_recording(x_access_token: str | None = Header(default=None)) -> AcceptedJob:
-        authorize(x_access_token)
+    async def stop_recording(request: Request, x_access_token: str | None = Header(default=None)) -> AcceptedJob:
+        authorize(request, x_access_token)
         try:
             job_id = await orchestrator.stop_recording()
         except Exception as exc:
@@ -113,8 +147,12 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         return AcceptedJob(job_id=job_id)
 
     @app.post("/api/chat", response_model=AcceptedJob, status_code=status.HTTP_202_ACCEPTED)
-    async def chat(request: ChatRequest, x_access_token: str | None = Header(default=None)) -> AcceptedJob:
-        authorize(x_access_token)
+    async def chat(
+        http_request: Request,
+        request: ChatRequest,
+        x_access_token: str | None = Header(default=None),
+    ) -> AcceptedJob:
+        authorize(http_request, x_access_token)
         try:
             job_id = await orchestrator.submit_chat(request.text, request.include_image, request.compare_model)
         except BusyError as exc:
@@ -122,21 +160,26 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         return AcceptedJob(job_id=job_id)
 
     @app.get("/api/jobs/{job_id}")
-    async def get_job(job_id: str, x_access_token: str | None = Header(default=None)):
-        authorize(x_access_token)
+    async def get_job(request: Request, job_id: str, x_access_token: str | None = Header(default=None)):
+        authorize(request, x_access_token)
         result = orchestrator.job(job_id)
         if result is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="job not found")
         return result
 
     @app.post("/api/playback/stop", status_code=status.HTTP_204_NO_CONTENT)
-    async def stop_playback(x_access_token: str | None = Header(default=None)) -> None:
-        authorize(x_access_token)
+    async def stop_playback(request: Request, x_access_token: str | None = Header(default=None)) -> None:
+        authorize(request, x_access_token)
         await orchestrator.stop_playback()
 
     @app.get("/api/audio/{job_id}/{name}")
-    async def get_audio(job_id: str, name: str, x_access_token: str | None = Header(default=None)):
-        authorize(x_access_token)
+    async def get_audio(
+        request: Request,
+        job_id: str,
+        name: str,
+        x_access_token: str | None = Header(default=None),
+    ):
+        authorize(request, x_access_token)
         path = orchestrator.media.get_audio(job_id, name)
         if path is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="audio not found or expired")
@@ -151,7 +194,8 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
             await websocket.close(code=1008)
             return
         supplied_token = str(auth.get("token", "")) if isinstance(auth, dict) else ""
-        if not supplied_token or not secrets.compare_digest(supplied_token, access_token):
+        client_host = websocket.client.host if websocket.client else None
+        if not token_is_authorized(supplied_token, client_host):
             await websocket.close(code=1008)
             return
         await orchestrator.events.connect(websocket, accept=False)
