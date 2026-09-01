@@ -41,8 +41,8 @@ class WhisperService:
         json_path = output_prefix.with_suffix(".json")
         try:
             if process.returncode != 0:
-                detail = stderr.decode(errors="replace").strip()
-                raise ASRError(detail or "whisper-cli failed")
+                detail = self._failure_detail(stderr.decode(errors="replace"))
+                raise ASRError(f"whisper-cli failed (exit {process.returncode}): {detail}")
             text = self._parse_output(json_path, stdout.decode(errors="replace"))
             if not text:
                 raise ASRError("no speech was recognized")
@@ -56,11 +56,27 @@ class WhisperService:
             payload = json.loads(json_path.read_text(encoding="utf-8"))
             transcription = payload.get("transcription", [])
             if isinstance(transcription, list):
-                return "".join(str(item.get("text", "")) for item in transcription).strip()
+                text = "".join(str(item.get("text", "")) for item in transcription)
+                return WhisperService._clean_text(text)
             if isinstance(payload.get("text"), str):
-                return payload["text"].strip()
+                return WhisperService._clean_text(payload["text"])
         lines = [line.strip() for line in stdout.splitlines() if line.strip()]
-        return " ".join(lines).strip()
+        return WhisperService._clean_text(" ".join(lines))
+
+    @staticmethod
+    def _clean_text(text: str) -> str:
+        text = text.strip()
+        if text.upper() in {"[BLANK_AUDIO]", "[NO_SPEECH]", "[SILENCE]"}:
+            return ""
+        return text
+
+    @staticmethod
+    def _failure_detail(stderr: str) -> str:
+        lines = [line.strip() for line in stderr.splitlines() if line.strip()]
+        if not lines:
+            return "no error detail"
+        explicit = [line for line in lines if "error" in line.lower() or "failed" in line.lower()]
+        return (explicit[-1] if explicit else lines[-1])[:500]
 
     @staticmethod
     def _duration(audio_path: Path) -> float:

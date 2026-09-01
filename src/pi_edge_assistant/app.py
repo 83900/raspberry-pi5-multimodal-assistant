@@ -65,7 +65,7 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         await orchestrator.shutdown()
         orchestrator.history.close()
 
-    app = FastAPI(title="Pi Edge Assistant", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="Pi Edge Assistant", version="0.2.1", lifespan=lifespan)
     app.state.settings = settings
     app.state.orchestrator = orchestrator
 

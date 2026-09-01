@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import signal
+import struct
 import uuid
 from pathlib import Path
 
@@ -66,7 +67,38 @@ class AudioService:
         if not path.exists() or path.stat().st_size <= 44:
             path.unlink(missing_ok=True)
             raise AudioError("microphone produced an empty recording")
+        self._finalize_wav(path)
         return path
+
+    @staticmethod
+    def _finalize_wav(path: Path) -> None:
+        """Replace arecord's streaming length placeholders with the real file sizes."""
+        file_size = path.stat().st_size
+        with path.open("r+b") as wav:
+            header = wav.read(min(file_size, 65_536))
+            if len(header) < 12 or header[:4] != b"RIFF" or header[8:12] != b"WAVE":
+                raise AudioError("microphone produced an invalid WAV file")
+
+            offset = 12
+            data_size_offset: int | None = None
+            while offset + 8 <= len(header):
+                chunk_id = header[offset : offset + 4]
+                chunk_size = struct.unpack_from("<I", header, offset + 4)[0]
+                if chunk_id == b"data":
+                    data_size_offset = offset + 4
+                    data_start = offset + 8
+                    break
+                offset += 8 + chunk_size + (chunk_size & 1)
+            else:
+                data_start = 0
+
+            if data_size_offset is None or data_start > file_size:
+                raise AudioError("microphone WAV file has no data chunk")
+
+            wav.seek(4)
+            wav.write(struct.pack("<I", file_size - 8))
+            wav.seek(data_size_offset)
+            wav.write(struct.pack("<I", file_size - data_start))
 
     async def cancel_recording(self) -> None:
         if self._capture_process is not None:
