@@ -7,6 +7,7 @@ const state = {
   socket: null,
   reconnectTimer: null,
   wakeLock: null,
+  assistantState: "IDLE",
 };
 
 if (displayMode) document.body.classList.add("display-mode");
@@ -45,6 +46,7 @@ function updateInteractionControls(status) {
 }
 
 function renderStatus(status) {
+  state.assistantState = status.state;
   const badge = $("#state");
   badge.textContent = status.state;
   badge.className = `state ${status.state.toLowerCase()}`;
@@ -233,11 +235,32 @@ async function requestWakeLock() {
   }
 }
 
+async function exitDisplay() {
+  const busy = !["IDLE", "ERROR"].includes(state.assistantState);
+  if (busy && !confirm("当前任务尚未完成，确认退出界面？任务会继续在后台运行。")) return;
+  try {
+    await api("/api/display/exit", {
+      method: "POST",
+      body: JSON.stringify({ confirm: busy }),
+    });
+    setNotice("正在退出…");
+  } catch (error) {
+    if (error.message === "interaction is still running") {
+      if (confirm("任务状态刚刚发生变化，仍然确认退出界面？")) {
+        await api("/api/display/exit", { method: "POST", body: JSON.stringify({ confirm: true }) });
+      }
+      return;
+    }
+    setNotice(error.message, true);
+  }
+}
+
 $("#login-form").addEventListener("submit", connect);
 $("#record").addEventListener("click", toggleRecording);
 $("#chat-form").addEventListener("submit", sendChat);
 $("#stop-playback").addEventListener("click", () => api("/api/playback/stop", { method: "POST" }).catch((error) => setNotice(error.message, true)));
 $("#browser-playback").addEventListener("click", browserPlayback);
+$("#exit-display").addEventListener("click", exitDisplay);
 $("#toggle-text").addEventListener("click", () => {
   const open = $("#chat-form").classList.toggle("open");
   $("#toggle-text").setAttribute("aria-expanded", String(open));

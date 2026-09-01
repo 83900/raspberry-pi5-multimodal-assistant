@@ -129,6 +129,7 @@ body.display-mode {
 .display-mode .header-status { flex-wrap: nowrap; gap: 8px; }
 .display-mode .header-metric { max-width: 145px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .display-mode .state { min-width: 82px; padding: 7px 9px; text-align: center; }
+.display-mode .exit-button { min-width: 58px; min-height: 40px; padding: 6px 10px; color: var(--danger); background: rgba(255, 111, 121, .12); }
 .display-mode #login { display: none; }
 .display-mode .workspace { position: relative; height: calc(100dvh - 112px); padding: 6px 8px; overflow: hidden; }
 .display-mode .display-only { display: flex; }

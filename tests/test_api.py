@@ -6,6 +6,7 @@ from starlette.websockets import WebSocketDisconnect
 
 from pi_edge_assistant.app import create_app
 from pi_edge_assistant.config import Settings
+from pi_edge_assistant.models import AssistantState
 
 from test_orchestrator import make_orchestrator
 
@@ -58,6 +59,15 @@ def test_display_session_is_loopback_only(tmp_path: Path) -> None:
         display_token = response.json()["token"]
         headers = {"X-Access-Token": display_token}
         assert local_client.get("/api/status", headers=headers).status_code == 200
+        assert local_client.post("/api/display/exit", headers=headers, json={"confirm": False}).status_code == 204
+        assert (settings.runtime_dir / "kiosk.exit").exists()
+        (settings.runtime_dir / "kiosk.exit").unlink()
+
+        app.state.orchestrator.status = app.state.orchestrator.status.model_copy(
+            update={"state": AssistantState.THINKING}
+        )
+        assert local_client.post("/api/display/exit", headers=headers, json={"confirm": False}).status_code == 409
+        assert local_client.post("/api/display/exit", headers=headers, json={"confirm": True}).status_code == 204
         with local_client.websocket_connect("/api/events") as websocket:
             websocket.send_json({"token": display_token})
             assert websocket.receive_json()["type"] == "status"
@@ -65,6 +75,9 @@ def test_display_session_is_loopback_only(tmp_path: Path) -> None:
     with TestClient(app, client=("192.168.1.50", 50000)) as remote_client:
         assert remote_client.post("/api/display/session").status_code == 403
         assert remote_client.get("/api/status", headers=headers).status_code == 401
+        assert remote_client.post(
+            "/api/display/exit", headers={"X-Access-Token": "main-token"}, json={"confirm": True}
+        ).status_code == 403
         with pytest.raises(WebSocketDisconnect) as exc_info:
             with remote_client.websocket_connect("/api/events") as websocket:
                 websocket.send_json({"token": display_token})

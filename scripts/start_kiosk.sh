@@ -10,11 +10,13 @@ data_dir="${EDGE_DATA_DIR:-$HOME/.local/share/pi-edge-assistant}"
 runtime_dir="${XDG_RUNTIME_DIR:-/tmp}/pi-edge-assistant"
 profile_dir="$data_dir/kiosk-profile"
 pause_file="$data_dir/kiosk.paused"
+exit_file="$runtime_dir/kiosk.exit"
 log_file="$data_dir/kiosk.log"
 kiosk_url="${KIOSK_URL:-http://127.0.0.1:8080/?display=1}"
 
 mkdir -p "$data_dir" "$runtime_dir" "$profile_dir"
 chmod 700 "$data_dir" "$runtime_dir" "$profile_dir"
+rm -f "$exit_file"
 exec 9>"$runtime_dir/kiosk.lock"
 if ! flock -n 9; then
   exit 0
@@ -73,7 +75,19 @@ while true; do
     xset -dpms >/dev/null 2>&1 || true
   fi
   printf '%s starting Chromium kiosk\n' "$(date --iso-8601=seconds)" >>"$log_file"
-  "$browser" "${browser_args[@]}" "$kiosk_url" >>"$log_file" 2>&1 || true
+  "$browser" "${browser_args[@]}" "$kiosk_url" >>"$log_file" 2>&1 &
+  browser_pid=$!
+  while kill -0 "$browser_pid" 2>/dev/null; do
+    if [[ -f "$exit_file" ]]; then
+      rm -f "$exit_file"
+      pkill -u "$(id -u)" -f -- "--user-data-dir=$profile_dir" 2>/dev/null || true
+      wait "$browser_pid" 2>/dev/null || true
+      printf '%s Chromium closed by the display exit button\n' "$(date --iso-8601=seconds)" >>"$log_file"
+      exit 0
+    fi
+    sleep 0.25
+  done
+  wait "$browser_pid" 2>/dev/null || true
   printf '%s Chromium exited; retrying in 3 seconds\n' "$(date --iso-8601=seconds)" >>"$log_file"
   sleep 3
 done

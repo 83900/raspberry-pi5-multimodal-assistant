@@ -27,6 +27,10 @@ class RecordingStartRequest(BaseModel):
     include_image: bool = False
 
 
+class DisplayExitRequest(BaseModel):
+    confirm: bool = False
+
+
 class AcceptedJob(BaseModel):
     job_id: str
     status: str = "accepted"

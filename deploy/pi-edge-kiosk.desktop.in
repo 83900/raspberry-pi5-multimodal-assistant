@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Pi Edge Assistant Kiosk
-Comment=Open the local touch display for Pi Edge Assistant
-Exec=@PROJECT_DIR@/scripts/start_kiosk.sh
-Terminal=false
-X-GNOME-Autostart-enabled=true

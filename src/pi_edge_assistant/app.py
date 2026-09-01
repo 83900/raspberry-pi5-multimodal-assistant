@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from .config import Settings
 from .database import HistoryStore
 from .events import EventHub
-from .models import AcceptedJob, ChatRequest, RecordingStartRequest
+from .models import AcceptedJob, ChatRequest, DisplayExitRequest, RecordingStartRequest
 from .orchestrator import BusyError, Orchestrator
 from .services.asr import WhisperService
 from .services.audio import AudioService
@@ -65,7 +65,7 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         await orchestrator.shutdown()
         orchestrator.history.close()
 
-    app = FastAPI(title="Pi Edge Assistant", version="0.2.1", lifespan=lifespan)
+    app = FastAPI(title="Pi Edge Assistant", version="0.3.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.orchestrator = orchestrator
 
@@ -102,6 +102,24 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         if not is_loopback(client_host):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="display sessions require loopback")
         return {"token": display_token}
+
+    @app.post("/api/display/exit", status_code=status.HTTP_204_NO_CONTENT)
+    async def exit_display(
+        request: Request,
+        payload: DisplayExitRequest,
+        x_access_token: str | None = Header(default=None),
+    ) -> None:
+        client_host = request.client.host if request.client else None
+        if (
+            not is_loopback(client_host)
+            or not x_access_token
+            or not secrets.compare_digest(x_access_token, display_token)
+        ):
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="display exit requires a local session")
+        busy = orchestrator.status.state.value not in {"IDLE", "ERROR"}
+        if busy and not payload.confirm:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="interaction is still running")
+        (settings.runtime_dir / "kiosk.exit").write_text("exit\n", encoding="utf-8")
 
     @app.get("/api/status")
     async def get_status(request: Request, x_access_token: str | None = Header(default=None)):
