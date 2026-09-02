@@ -1,0 +1,200 @@
+{"text":"我这个插座现在有电吗？","label":1,"lang":"zh","group":"challenge_v_001"}
+{"text":"看现在这个插座是不是通电的","label":1,"lang":"zh","group":"challenge_v_001"}
+{"text":"Is this power strip switched on right now?","label":1,"lang":"en","group":"challenge_v_002"}
+{"text":"Can you tell whether the power strip in front of me is on?","label":1,"lang":"en","group":"challenge_v_002"}
+{"text":"我这根网线插好了吗？","label":1,"lang":"zh","group":"challenge_v_003"}
+{"text":"现在网线是不是已经插进接口了","label":1,"lang":"zh","group":"challenge_v_003"}
+{"text":"Is the Ethernet cable plugged into the router?","label":1,"lang":"en","group":"challenge_v_004"}
+{"text":"Can you check whether the network cable is connected?","label":1,"lang":"en","group":"challenge_v_004"}
+{"text":"我现在戴着耳机吗？","label":1,"lang":"zh","group":"challenge_v_005"}
+{"text":"看看我耳朵上有没有耳机","label":1,"lang":"zh","group":"challenge_v_005"}
+{"text":"Am I wearing headphones at the moment?","label":1,"lang":"en","group":"challenge_v_006"}
+{"text":"Can you tell if I have headphones on?","label":1,"lang":"en","group":"challenge_v_006"}
+{"text":"我的马克杯在哪里？","label":1,"lang":"zh","group":"challenge_v_007"}
+{"text":"现在能找到我的马克杯吗","label":1,"lang":"zh","group":"challenge_v_007"}
+{"text":"Where did I put my phone?","label":1,"lang":"en","group":"challenge_v_008"}
+{"text":"Can you find my phone in front of me?","label":1,"lang":"en","group":"challenge_v_008"}
+{"text":"这个纸箱开着还是关着？","label":1,"lang":"zh","group":"challenge_v_009"}
+{"text":"看一下眼前箱子的盖子有没有打开","label":1,"lang":"zh","group":"challenge_v_009"}
+{"text":"Is this drawer open or closed?","label":1,"lang":"en","group":"challenge_v_010"}
+{"text":"Can you see whether the drawer is currently open?","label":1,"lang":"en","group":"challenge_v_010"}
+{"text":"这个西红柿看起来新鲜吗？","label":1,"lang":"zh","group":"challenge_v_011"}
+{"text":"你看我手上这个番茄还新不新鲜","label":1,"lang":"zh","group":"challenge_v_011"}
+{"text":"Does this avocado look ready to eat?","label":1,"lang":"en","group":"challenge_v_012"}
+{"text":"Can you judge whether this avocado looks ripe?","label":1,"lang":"en","group":"challenge_v_012"}
+{"text":"这块屏幕上显示的是多少？","label":1,"lang":"zh","group":"challenge_v_013"}
+{"text":"帮我读一下现在屏幕上的数字","label":1,"lang":"zh","group":"challenge_v_013"}
+{"text":"What number is showing on this display?","label":1,"lang":"en","group":"challenge_v_014"}
+{"text":"Read the value currently shown on the screen","label":1,"lang":"en","group":"challenge_v_014"}
+{"text":"我的杯子在键盘前面还是后面？","label":1,"lang":"zh","group":"challenge_v_015"}
+{"text":"看一下杯子和键盘现在是什么位置关系","label":1,"lang":"zh","group":"challenge_v_015"}
+{"text":"Is the remote in front of or behind the laptop?","label":1,"lang":"en","group":"challenge_v_016"}
+{"text":"Tell me where the remote is relative to the laptop","label":1,"lang":"en","group":"challenge_v_016"}
+{"text":"这两个盒子哪个颜色更深？","label":1,"lang":"zh","group":"challenge_v_017"}
+{"text":"比较一下眼前两个盒子的颜色深浅","label":1,"lang":"zh","group":"challenge_v_017"}
+{"text":"Which of these two bottles is taller?","label":1,"lang":"en","group":"challenge_v_018"}
+{"text":"Compare the height of the two bottles in front of me","label":1,"lang":"en","group":"challenge_v_018"}
+{"text":"我的桌面上有充电宝吗？","label":1,"lang":"zh","group":"challenge_v_019"}
+{"text":"看看桌上现在有没有移动电源","label":1,"lang":"zh","group":"challenge_v_019"}
+{"text":"Is there a keyboard on the desk?","label":1,"lang":"en","group":"challenge_v_020"}
+{"text":"Can you see a keyboard anywhere in front of me?","label":1,"lang":"en","group":"challenge_v_020"}
+{"text":"我这件衣服有污渍吗？","label":1,"lang":"zh","group":"challenge_v_021"}
+{"text":"看我现在穿的衣服上有没有脏东西","label":1,"lang":"zh","group":"challenge_v_021"}
+{"text":"Is there anything stuck to my sleeve?","label":1,"lang":"en","group":"challenge_v_022"}
+{"text":"Can you see something on the sleeve I'm wearing?","label":1,"lang":"en","group":"challenge_v_022"}
+{"text":"这个瓶盖拧紧了吗？","label":1,"lang":"zh","group":"challenge_v_023"}
+{"text":"看看眼前这个瓶子的盖子有没有盖好","label":1,"lang":"zh","group":"challenge_v_023"}
+{"text":"Is the lid on this container closed properly?","label":1,"lang":"en","group":"challenge_v_024"}
+{"text":"Can you tell if this jar is fully closed?","label":1,"lang":"en","group":"challenge_v_024"}
+{"text":"这张票上写的是几点？","label":1,"lang":"zh","group":"challenge_v_025"}
+{"text":"帮我读一下眼前票据上的时间","label":1,"lang":"zh","group":"challenge_v_025"}
+{"text":"What time is printed on this ticket?","label":1,"lang":"en","group":"challenge_v_026"}
+{"text":"Can you read the time shown on the ticket I'm holding?","label":1,"lang":"en","group":"challenge_v_026"}
+{"text":"我现在举的是左手还是右手？","label":1,"lang":"zh","group":"challenge_v_027"}
+{"text":"看看我举起来的是哪只手","label":1,"lang":"zh","group":"challenge_v_027"}
+{"text":"Which hand am I holding up?","label":1,"lang":"en","group":"challenge_v_028"}
+{"text":"Can you tell whether I'm raising my left or right hand?","label":1,"lang":"en","group":"challenge_v_028"}
+{"text":"我坐姿歪了吗？","label":1,"lang":"zh","group":"challenge_v_029"}
+{"text":"看看我现在是不是坐歪了","label":1,"lang":"zh","group":"challenge_v_029"}
+{"text":"Am I standing straight?","label":1,"lang":"en","group":"challenge_v_030"}
+{"text":"Can you check whether my posture looks straight?","label":1,"lang":"en","group":"challenge_v_030"}
+{"text":"这个接口是USB-C吗？","label":1,"lang":"zh","group":"challenge_v_031"}
+{"text":"看一下眼前这个接口是不是Type-C","label":1,"lang":"zh","group":"challenge_v_031"}
+{"text":"Is this connector USB-C?","label":1,"lang":"en","group":"challenge_v_032"}
+{"text":"Can you identify whether the port I'm showing is USB-C?","label":1,"lang":"en","group":"challenge_v_032"}
+{"text":"这个硬盘灯在闪吗？","label":1,"lang":"zh","group":"challenge_v_033"}
+{"text":"看看硬盘指示灯现在是不是在闪烁","label":1,"lang":"zh","group":"challenge_v_033"}
+{"text":"Is this status LED blinking?","label":1,"lang":"en","group":"challenge_v_034"}
+{"text":"Can you see whether the indicator light is flashing?","label":1,"lang":"en","group":"challenge_v_034"}
+{"text":"我的水杯是不是快空了？","label":1,"lang":"zh","group":"challenge_v_035"}
+{"text":"看看杯子里的水还剩多少","label":1,"lang":"zh","group":"challenge_v_035"}
+{"text":"Is this soap dispenser nearly empty?","label":1,"lang":"en","group":"challenge_v_036"}
+{"text":"Can you see how much liquid is left in this dispenser?","label":1,"lang":"en","group":"challenge_v_036"}
+{"text":"这根香蕉表面有黑点吗？","label":1,"lang":"zh","group":"challenge_v_037"}
+{"text":"看一下香蕉皮上有没有明显黑斑","label":1,"lang":"zh","group":"challenge_v_037"}
+{"text":"Are there scratches on this phone screen?","label":1,"lang":"en","group":"challenge_v_038"}
+{"text":"Can you see any visible scratches on the screen?","label":1,"lang":"en","group":"challenge_v_038"}
+{"text":"这个标签是红色还是橙色？","label":1,"lang":"zh","group":"challenge_v_039"}
+{"text":"看一下我指的标签到底是什么颜色","label":1,"lang":"zh","group":"challenge_v_039"}
+{"text":"Is this light green or blue?","label":1,"lang":"en","group":"challenge_v_040"}
+{"text":"Can you tell what color this indicator appears to be?","label":1,"lang":"en","group":"challenge_v_040"}
+{"text":"这页纸是不是空白的？","label":1,"lang":"zh","group":"challenge_v_041"}
+{"text":"看看我手里这张纸有没有内容","label":1,"lang":"zh","group":"challenge_v_041"}
+{"text":"Is this page blank?","label":1,"lang":"en","group":"challenge_v_042"}
+{"text":"Can you see whether anything is written on this sheet?","label":1,"lang":"en","group":"challenge_v_042"}
+{"text":"这个包装上有条形码吗？","label":1,"lang":"zh","group":"challenge_v_043"}
+{"text":"看看盒子表面能不能找到barcode","label":1,"lang":"zh","group":"challenge_v_043"}
+{"text":"Is there a barcode on this box?","label":1,"lang":"en","group":"challenge_v_044"}
+{"text":"Can you see a barcode on the package I'm holding?","label":1,"lang":"en","group":"challenge_v_044"}
+{"text":"我桌上哪一个是黑色充电器？","label":1,"lang":"zh","group":"challenge_v_045"}
+{"text":"帮我从桌上的东西里找出黑色充电器","label":1,"lang":"zh","group":"challenge_v_045"}
+{"text":"Which item here is the calculator?","label":1,"lang":"en","group":"challenge_v_046"}
+{"text":"Can you identify the calculator among the objects in front of me?","label":1,"lang":"en","group":"challenge_v_046"}
+{"text":"我现在是不是闭着眼睛？","label":1,"lang":"zh","group":"challenge_v_047"}
+{"text":"看看我眼睛现在是睁着还是闭着","label":1,"lang":"zh","group":"challenge_v_047"}
+{"text":"Am I smiling right now?","label":1,"lang":"en","group":"challenge_v_048"}
+{"text":"Can you tell whether I'm smiling?","label":1,"lang":"en","group":"challenge_v_048"}
+{"text":"这个camera前面现在有没有人","label":1,"lang":"mix","group":"challenge_v_049"}
+{"text":"check一下镜头前现在是不是有人","label":1,"lang":"mix","group":"challenge_v_049"}
+{"text":"is my lap top lid open right now","label":1,"lang":"asr","group":"challenge_v_050"}
+{"text":"can u see if the laptop lid is close or open","label":1,"lang":"asr","group":"challenge_v_050"}
+{"text":"这个插座一般能承受多大功率？","label":0,"lang":"zh","group":"challenge_t_051"}
+{"text":"家用插座的额定功率通常是多少","label":0,"lang":"zh","group":"challenge_t_051"}
+{"text":"How does a power strip surge protector work?","label":0,"lang":"en","group":"challenge_t_052"}
+{"text":"Explain how surge protection in a power strip works","label":0,"lang":"en","group":"challenge_t_052"}
+{"text":"网线插头为什么叫RJ45？","label":0,"lang":"zh","group":"challenge_t_053"}
+{"text":"解释一下RJ45接口是什么","label":0,"lang":"zh","group":"challenge_t_053"}
+{"text":"What is the difference between Cat5e and Cat6 Ethernet cables?","label":0,"lang":"en","group":"challenge_t_054"}
+{"text":"Explain Cat5e versus Cat6 network cables","label":0,"lang":"en","group":"challenge_t_054"}
+{"text":"耳机为什么有主动降噪？","label":0,"lang":"zh","group":"challenge_t_055"}
+{"text":"解释一下耳机ANC的工作原理","label":0,"lang":"zh","group":"challenge_t_055"}
+{"text":"How does Bluetooth audio work?","label":0,"lang":"en","group":"challenge_t_056"}
+{"text":"Explain how wireless headphones transmit sound","label":0,"lang":"en","group":"challenge_t_056"}
+{"text":"马克杯一般用什么材料做？","label":0,"lang":"zh","group":"challenge_t_057"}
+{"text":"常见的杯子材质有哪些","label":0,"lang":"zh","group":"challenge_t_057"}
+{"text":"What size notebook is best for university notes?","label":0,"lang":"en","group":"challenge_t_058"}
+{"text":"Recommend a notebook size for studying","label":0,"lang":"en","group":"challenge_t_058"}
+{"text":"纸箱为什么常用瓦楞纸？","label":0,"lang":"zh","group":"challenge_t_059"}
+{"text":"解释一下瓦楞纸箱的结构","label":0,"lang":"zh","group":"challenge_t_059"}
+{"text":"Why do drawers sometimes use soft-close mechanisms?","label":0,"lang":"en","group":"challenge_t_060"}
+{"text":"Explain how soft-close drawer slides work","label":0,"lang":"en","group":"challenge_t_060"}
+{"text":"怎么判断西红柿新不新鲜？","label":0,"lang":"zh","group":"challenge_t_061"}
+{"text":"告诉我挑选新鲜番茄的方法","label":0,"lang":"zh","group":"challenge_t_061"}
+{"text":"How can you tell when an avocado is ripe?","label":0,"lang":"en","group":"challenge_t_062"}
+{"text":"What are the usual signs of a ripe avocado?","label":0,"lang":"en","group":"challenge_t_062"}
+{"text":"数码屏是怎么显示数字的？","label":0,"lang":"zh","group":"challenge_t_063"}
+{"text":"解释一下七段数码管的原理","label":0,"lang":"zh","group":"challenge_t_063"}
+{"text":"How does an LCD display show numbers?","label":0,"lang":"en","group":"challenge_t_064"}
+{"text":"Explain how small digital displays work","label":0,"lang":"en","group":"challenge_t_064"}
+{"text":"键盘的人体工学摆放应该怎样？","label":0,"lang":"zh","group":"challenge_t_065"}
+{"text":"键盘和杯子放多远比较安全","label":0,"lang":"zh","group":"challenge_t_065"}
+{"text":"Where should a laptop be positioned for good ergonomics?","label":0,"lang":"en","group":"challenge_t_066"}
+{"text":"Explain proper laptop placement on a desk","label":0,"lang":"en","group":"challenge_t_066"}
+{"text":"为什么不同塑料盒颜色深浅不同？","label":0,"lang":"zh","group":"challenge_t_067"}
+{"text":"塑料制品是怎么着色的","label":0,"lang":"zh","group":"challenge_t_067"}
+{"text":"How are bottle sizes measured?","label":0,"lang":"en","group":"challenge_t_068"}
+{"text":"Explain standard ways to measure bottle height and capacity","label":0,"lang":"en","group":"challenge_t_068"}
+{"text":"充电宝可以带上飞机吗？","label":0,"lang":"zh","group":"challenge_t_069"}
+{"text":"移动电源乘飞机有哪些规定","label":0,"lang":"zh","group":"challenge_t_069"}
+{"text":"What type of keyboard is best for programming?","label":0,"lang":"en","group":"challenge_t_070"}
+{"text":"Recommend a keyboard for coding","label":0,"lang":"en","group":"challenge_t_070"}
+{"text":"衣服上的油渍怎么洗？","label":0,"lang":"zh","group":"challenge_t_071"}
+{"text":"怎么去除衬衫上的污渍","label":0,"lang":"zh","group":"challenge_t_071"}
+{"text":"How should I remove lint from a sleeve?","label":0,"lang":"en","group":"challenge_t_072"}
+{"text":"What's the best way to clean lint off clothing?","label":0,"lang":"en","group":"challenge_t_072"}
+{"text":"为什么瓶盖拧紧后不容易漏水？","label":0,"lang":"zh","group":"challenge_t_073"}
+{"text":"解释一下瓶盖密封的原理","label":0,"lang":"zh","group":"challenge_t_073"}
+{"text":"How do airtight container lids work?","label":0,"lang":"en","group":"challenge_t_074"}
+{"text":"Explain why jar lids create a seal","label":0,"lang":"en","group":"challenge_t_074"}
+{"text":"火车票上的时间一般怎么看？","label":0,"lang":"zh","group":"challenge_t_075"}
+{"text":"解释一下票据上的发车时间格式","label":0,"lang":"zh","group":"challenge_t_075"}
+{"text":"How are times normally written on airline tickets?","label":0,"lang":"en","group":"challenge_t_076"}
+{"text":"Explain the time format used on travel tickets","label":0,"lang":"en","group":"challenge_t_076"}
+{"text":"左撇子和右撇子有什么区别？","label":0,"lang":"zh","group":"challenge_t_077"}
+{"text":"为什么有的人习惯用左手","label":0,"lang":"zh","group":"challenge_t_077"}
+{"text":"Why are most people right-handed?","label":0,"lang":"en","group":"challenge_t_078"}
+{"text":"Explain handedness in humans","label":0,"lang":"en","group":"challenge_t_078"}
+{"text":"怎样改善坐姿？","label":0,"lang":"zh","group":"challenge_t_079"}
+{"text":"长期坐着怎么保持正确姿势","label":0,"lang":"zh","group":"challenge_t_079"}
+{"text":"What is good standing posture?","label":0,"lang":"en","group":"challenge_t_080"}
+{"text":"Give me tips for improving posture","label":0,"lang":"en","group":"challenge_t_080"}
+{"text":"USB-C和Lightning有什么区别？","label":0,"lang":"zh","group":"challenge_t_081"}
+{"text":"比较一下Type-C和Lightning接口","label":0,"lang":"zh","group":"challenge_t_081"}
+{"text":"What is USB-C Power Delivery?","label":0,"lang":"en","group":"challenge_t_082"}
+{"text":"Explain how USB-C PD works","label":0,"lang":"en","group":"challenge_t_082"}
+{"text":"硬盘指示灯为什么会闪？","label":0,"lang":"zh","group":"challenge_t_083"}
+{"text":"电脑硬盘灯闪烁代表什么","label":0,"lang":"zh","group":"challenge_t_083"}
+{"text":"Why do devices use blinking status LEDs?","label":0,"lang":"en","group":"challenge_t_084"}
+{"text":"Explain what a flashing indicator light usually means","label":0,"lang":"en","group":"challenge_t_084"}
+{"text":"成年人一天应该喝多少水？","label":0,"lang":"zh","group":"challenge_t_085"}
+{"text":"每天喝水多少比较合适","label":0,"lang":"zh","group":"challenge_t_085"}
+{"text":"How do liquid soap dispensers work?","label":0,"lang":"en","group":"challenge_t_086"}
+{"text":"Explain the pump mechanism in soap dispensers","label":0,"lang":"en","group":"challenge_t_086"}
+{"text":"香蕉皮为什么会出现黑点？","label":0,"lang":"zh","group":"challenge_t_087"}
+{"text":"香蕉成熟后为什么会变黑","label":0,"lang":"zh","group":"challenge_t_087"}
+{"text":"What causes scratches on phone screens?","label":0,"lang":"en","group":"challenge_t_088"}
+{"text":"Explain how phone screen coatings resist scratches","label":0,"lang":"en","group":"challenge_t_088"}
+{"text":"红色和橙色在RGB里有什么区别？","label":0,"lang":"zh","group":"challenge_t_089"}
+{"text":"解释一下红色和橙色的颜色值","label":0,"lang":"zh","group":"challenge_t_089"}
+{"text":"Why can blue and green LEDs look similar?","label":0,"lang":"en","group":"challenge_t_090"}
+{"text":"Explain how LED color is produced","label":0,"lang":"en","group":"challenge_t_090"}
+{"text":"打印机为什么会打印出空白页？","label":0,"lang":"zh","group":"challenge_t_091"}
+{"text":"打印出来是白纸可能是什么原因","label":0,"lang":"zh","group":"challenge_t_091"}
+{"text":"What paper weight is best for printing?","label":0,"lang":"en","group":"challenge_t_092"}
+{"text":"Explain common printer paper weights","label":0,"lang":"en","group":"challenge_t_092"}
+{"text":"条形码是什么原理？","label":0,"lang":"zh","group":"challenge_t_093"}
+{"text":"商品barcode是怎么编码信息的","label":0,"lang":"zh","group":"challenge_t_093"}
+{"text":"How do barcode scanners work?","label":0,"lang":"en","group":"challenge_t_094"}
+{"text":"Explain how a barcode stores information","label":0,"lang":"en","group":"challenge_t_094"}
+{"text":"黑色充电器和白色充电器性能有区别吗？","label":0,"lang":"zh","group":"challenge_t_095"}
+{"text":"充电器外壳颜色会影响性能吗","label":0,"lang":"zh","group":"challenge_t_095"}
+{"text":"How does a calculator process arithmetic?","label":0,"lang":"en","group":"challenge_t_096"}
+{"text":"Explain how electronic calculators work","label":0,"lang":"en","group":"challenge_t_096"}
+{"text":"人为什么会眨眼？","label":0,"lang":"zh","group":"challenge_t_097"}
+{"text":"解释一下眨眼的生理作用","label":0,"lang":"zh","group":"challenge_t_097"}
+{"text":"Why do people smile?","label":0,"lang":"en","group":"challenge_t_098"}
+{"text":"Explain the psychology of smiling","label":0,"lang":"en","group":"challenge_t_098"}
+{"text":"camera检测有人一般用什么算法","label":0,"lang":"mix","group":"challenge_t_099"}
+{"text":"怎么用computer vision判断画面里有没有人","label":0,"lang":"mix","group":"challenge_t_099"}
+{"text":"why dose laptop lid sensor know its closed","label":0,"lang":"asr","group":"challenge_t_100"}
+{"text":"how does a lap top detect when the lid closes","label":0,"lang":"asr","group":"challenge_t_100"}

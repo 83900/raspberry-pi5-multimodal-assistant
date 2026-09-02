@@ -1,0 +1,76 @@
+{"text": "What is on the table right now?", "label": 1, "lang": "en", "group": "vision_scene_002"}
+{"text": "Can you tell me what's currently sitting on the desk?", "label": 1, "lang": "en", "group": "vision_scene_002"}
+{"text": "Is anyone behind me?", "label": 1, "lang": "en", "group": "vision_presence_012"}
+{"text": "Can you tell if there is a person standing behind me?", "label": 1, "lang": "en", "group": "vision_presence_012"}
+{"text": "What does this label say?", "label": 1, "lang": "en", "group": "vision_read_018"}
+{"text": "Can you read the text printed on this package?", "label": 1, "lang": "en", "group": "vision_read_018"}
+{"text": "我的电脑还插着充电线吗？", "label": 1, "lang": "zh", "group": "vision_device_021"}
+{"text": "电脑是不是还连着充电器", "label": 1, "lang": "zh", "group": "vision_device_021"}
+{"text": "我的桌子是不是很乱？", "label": 1, "lang": "zh", "group": "vision_scene_025"}
+{"text": "桌面现在看起来乱不乱", "label": 1, "lang": "zh", "group": "vision_scene_025"}
+{"text": "Is the door fully closed?", "label": 1, "lang": "en", "group": "vision_state_032"}
+{"text": "Can you check whether the door is shut properly?", "label": 1, "lang": "en", "group": "vision_state_032"}
+{"text": "图片分类是什么？", "label": 0, "lang": "zh", "group": "text_cv_040"}
+{"text": "给我解释一下图像分类的原理", "label": 0, "lang": "zh", "group": "text_cv_040"}
+{"text": "What is image classification?", "label": 0, "lang": "en", "group": "text_cv_041"}
+{"text": "Explain image classification in machine learning", "label": 0, "lang": "en", "group": "text_cv_041"}
+{"text": "手机拍照为什么会有HDR？", "label": 0, "lang": "zh", "group": "text_camera_050"}
+{"text": "解释一下手机摄影里的HDR原理", "label": 0, "lang": "zh", "group": "text_camera_050"}
+{"text": "Why does a wide angle lens capture more of a scene?", "label": 0, "lang": "en", "group": "text_camera_059"}
+{"text": "Explain how wide angle lenses work", "label": 0, "lang": "en", "group": "text_camera_059"}
+{"text": "What is data leakage in machine learning?", "label": 0, "lang": "en", "group": "text_ml_068"}
+{"text": "Explain why data leakage is dangerous", "label": 0, "lang": "en", "group": "text_ml_068"}
+{"text": "What operating systems can Raspberry Pi run?", "label": 0, "lang": "en", "group": "text_pi_076"}
+{"text": "Tell me about operating systems for Raspberry Pi", "label": 0, "lang": "en", "group": "text_pi_076"}
+{"text": "为什么训练模型需要验证集？", "label": 0, "lang": "zh", "group": "text_ml_087"}
+{"text": "validation set有什么作用", "label": 0, "lang": "mix", "group": "text_ml_087"}
+{"text": "What is a test set used for?", "label": 0, "lang": "en", "group": "text_ml_088"}
+{"text": "Why should the test set be kept separate?", "label": 0, "lang": "en", "group": "text_ml_088"}
+{"text": "precision和recall有什么区别？", "label": 0, "lang": "mix", "group": "text_metrics_089"}
+{"text": "解释一下精确率和召回率", "label": 0, "lang": "zh", "group": "text_metrics_089"}
+{"text": "Why is the sky blue?", "label": 0, "lang": "en", "group": "text_general_092"}
+{"text": "Explain why the daytime sky appears blue", "label": 0, "lang": "en", "group": "text_general_092"}
+{"text": "帮我写一封英文邮件", "label": 0, "lang": "zh", "group": "text_writing_093"}
+{"text": "帮我起草一封正式的英语邮件", "label": 0, "lang": "zh", "group": "text_writing_093"}
+{"text": "can u explain how camera autofocus works", "label": 0, "lang": "asr", "group": "text_camera_097"}
+{"text": "how dose camera auto focus work", "label": 0, "lang": "asr", "group": "text_camera_097"}
+{"text": "帮我看下相机传感器原理", "label": 0, "lang": "zh", "group": "text_hard_098"}
+{"text": "你能不能给我看看camera sensor是怎么工作的", "label": 0, "lang": "mix", "group": "text_hard_098"}
+{"text": "What color are my shoes?", "label": 1, "lang": "en", "group": "vision_clothing_118"}
+{"text": "Tell me the color of the shoes I'm wearing", "label": 1, "lang": "en", "group": "vision_clothing_118"}
+{"text": "Is this document upside down?", "label": 1, "lang": "en", "group": "vision_orientation_138"}
+{"text": "Can you check whether this page is the right way up?", "label": 1, "lang": "en", "group": "vision_orientation_138"}
+{"text": "Does this box look damaged?", "label": 1, "lang": "en", "group": "vision_condition_142"}
+{"text": "Can you see any damage on this package?", "label": 1, "lang": "en", "group": "vision_condition_142"}
+{"text": "Does this plate look clean?", "label": 1, "lang": "en", "group": "vision_condition_148"}
+{"text": "Can you see any dirt left on this plate?", "label": 1, "lang": "en", "group": "vision_condition_148"}
+{"text": "这张纸上第一行写的什么？", "label": 1, "lang": "zh", "group": "vision_read_159"}
+{"text": "帮我读一下眼前纸张的第一行", "label": 1, "lang": "zh", "group": "vision_read_159"}
+{"text": "这个瓶子的保质期是什么时候？", "label": 1, "lang": "zh", "group": "vision_read_161"}
+{"text": "看看瓶子上标的有效期到哪天", "label": 1, "lang": "zh", "group": "vision_read_161"}
+{"text": "Do these two objects look the same?", "label": 1, "lang": "en", "group": "vision_compare_170"}
+{"text": "Can you compare these two items and tell if they match?", "label": 1, "lang": "en", "group": "vision_compare_170"}
+{"text": "什么是白平衡？", "label": 0, "lang": "zh", "group": "text_photo_179"}
+{"text": "摄影里的white balance有什么作用", "label": 0, "lang": "mix", "group": "text_photo_179"}
+{"text": "如何用Python调用摄像头？", "label": 0, "lang": "zh", "group": "text_code_camera_187"}
+{"text": "写一个Python获取camera画面的例子", "label": 0, "lang": "mix", "group": "text_code_camera_187"}
+{"text": "Picamera2拍照代码怎么写？", "label": 0, "lang": "mix", "group": "text_code_camera_193"}
+{"text": "给我一个picamera2 capture_file的例子", "label": 0, "lang": "mix", "group": "text_code_camera_193"}
+{"text": "树莓派5支持什么摄像头？", "label": 0, "lang": "zh", "group": "text_pi_camera_195"}
+{"text": "Pi 5可以连接哪些camera module", "label": 0, "lang": "mix", "group": "text_pi_camera_195"}
+{"text": "Which camera modules work with Raspberry Pi 5?", "label": 0, "lang": "en", "group": "text_pi_camera_196"}
+{"text": "Tell me which cameras are compatible with Raspberry Pi 5", "label": 0, "lang": "en", "group": "text_pi_camera_196"}
+{"text": "目标检测和图片分类有什么区别？", "label": 0, "lang": "zh", "group": "text_cv_207"}
+{"text": "object detection和image classification区别是什么", "label": 0, "lang": "mix", "group": "text_cv_207"}
+{"text": "视觉语言模型是什么？", "label": 0, "lang": "zh", "group": "text_ai_215"}
+{"text": "VLM和普通LLM有什么区别", "label": 0, "lang": "mix", "group": "text_ai_215"}
+{"text": "384维向量是什么意思？", "label": 0, "lang": "zh", "group": "text_embedding_227"}
+{"text": "embedding有384个dimension是什么意思", "label": 0, "lang": "mix", "group": "text_embedding_227"}
+{"text": "Why can logistic regression perform classification?", "label": 0, "lang": "en", "group": "text_ml_230"}
+{"text": "Explain how a logistic regression classifier works", "label": 0, "lang": "en", "group": "text_ml_230"}
+{"text": "sigmoid函数是什么？", "label": 0, "lang": "zh", "group": "text_ml_231"}
+{"text": "解释一下sigmoid把logit转换成概率的过程", "label": 0, "lang": "mix", "group": "text_ml_231"}
+{"text": "How should I choose a classification threshold?", "label": 0, "lang": "en", "group": "text_ml_234"}
+{"text": "Explain how to tune a decision threshold", "label": 0, "lang": "en", "group": "text_ml_234"}
+{"text": "为什么要按group切数据？", "label": 0, "lang": "zh", "group": "text_ml_241"}
+{"text": "数据集按template group split有什么好处", "label": 0, "lang": "mix", "group": "text_ml_241"}

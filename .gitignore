@@ -12,6 +12,8 @@ dist/
 
 # Runtime data and generated reports
 data/
+!model/vision_intent/data/
+!model/vision_intent/data/*.jsonl
 audit/
 backups/
 results/

@@ -1,0 +1,74 @@
+{"text": "我今天穿的衣服是什么颜色？", "label": 1, "lang": "zh", "group": "vision_color_007"}
+{"text": "我身上的衣服现在是什么颜色的", "label": 1, "lang": "zh", "group": "vision_color_007"}
+{"text": "What color is my shirt?", "label": 1, "lang": "en", "group": "vision_color_008"}
+{"text": "Can you tell the color of the shirt I'm wearing?", "label": 1, "lang": "en", "group": "vision_color_008"}
+{"text": "灯现在开着吗？", "label": 1, "lang": "zh", "group": "vision_state_009"}
+{"text": "看看灯有没有亮", "label": 1, "lang": "zh", "group": "vision_state_009"}
+{"text": "我的杯子满了吗？", "label": 1, "lang": "zh", "group": "vision_level_023"}
+{"text": "杯子里面的水是不是快满了", "label": 1, "lang": "zh", "group": "vision_level_023"}
+{"text": "Is my glass empty?", "label": 1, "lang": "en", "group": "vision_level_024"}
+{"text": "Can you see whether there's anything left in my glass?", "label": 1, "lang": "en", "group": "vision_level_024"}
+{"text": "这个水果熟了吗？", "label": 1, "lang": "zh", "group": "vision_attribute_027"}
+{"text": "我手上这个水果看起来能吃了吗", "label": 1, "lang": "zh", "group": "vision_attribute_027"}
+{"text": "我拿反了吗？", "label": 1, "lang": "zh", "group": "vision_orientation_029"}
+{"text": "这个东西是不是被我拿反了", "label": 1, "lang": "zh", "group": "vision_orientation_029"}
+{"text": "解释一下摄影的曝光三角", "label": 0, "lang": "zh", "group": "text_camera_036"}
+{"text": "什么叫光圈、快门和ISO", "label": 0, "lang": "zh", "group": "text_camera_036"}
+{"text": "Why do phones use computational photography?", "label": 0, "lang": "en", "group": "text_camera_051"}
+{"text": "Explain computational photography on smartphones", "label": 0, "lang": "en", "group": "text_camera_051"}
+{"text": "什么是景深？", "label": 0, "lang": "zh", "group": "text_photo_056"}
+{"text": "摄影中的景深是什么意思", "label": 0, "lang": "zh", "group": "text_photo_056"}
+{"text": "What does depth of field mean in photography?", "label": 0, "lang": "en", "group": "text_photo_057"}
+{"text": "Explain shallow depth of field", "label": 0, "lang": "en", "group": "text_photo_057"}
+{"text": "为什么广角镜头看起来更宽？", "label": 0, "lang": "zh", "group": "text_camera_058"}
+{"text": "解释一下广角镜头的成像特点", "label": 0, "lang": "zh", "group": "text_camera_058"}
+{"text": "帮我生成一张猫的图片", "label": 0, "lang": "zh", "group": "text_generate_060"}
+{"text": "生成一个猫坐在窗边的图像", "label": 0, "lang": "zh", "group": "text_generate_060"}
+{"text": "What is an attention mechanism?", "label": 0, "lang": "en", "group": "text_ai_063"}
+{"text": "Explain attention in Transformer models", "label": 0, "lang": "en", "group": "text_ai_063"}
+{"text": "Python里的list和tuple有什么区别", "label": 0, "lang": "zh", "group": "text_code_071"}
+{"text": "解释一下Python列表和元组的区别", "label": 0, "lang": "zh", "group": "text_code_071"}
+{"text": "How does a Python dictionary work?", "label": 0, "lang": "en", "group": "text_code_072"}
+{"text": "Explain dictionaries in Python", "label": 0, "lang": "en", "group": "text_code_072"}
+{"text": "How many people are in the room?", "label": 1, "lang": "en", "group": "vision_count_108"}
+{"text": "Count the people you can currently see", "label": 1, "lang": "en", "group": "vision_count_108"}
+{"text": "我左边放的是什么？", "label": 1, "lang": "zh", "group": "vision_spatial_109"}
+{"text": "看看我左手边现在是什么东西", "label": 1, "lang": "zh", "group": "vision_spatial_109"}
+{"text": "我穿的是长袖还是短袖？", "label": 1, "lang": "zh", "group": "vision_clothing_115"}
+{"text": "看看我现在衣服是长袖的吗", "label": 1, "lang": "zh", "group": "vision_clothing_115"}
+{"text": "Is this switch currently on or off?", "label": 1, "lang": "en", "group": "vision_state_130"}
+{"text": "Can you tell the current position of this switch?", "label": 1, "lang": "en", "group": "vision_state_130"}
+{"text": "Which side of this card is facing up?", "label": 1, "lang": "en", "group": "vision_orientation_140"}
+{"text": "Can you tell whether the front or back of the card is visible?", "label": 1, "lang": "en", "group": "vision_orientation_140"}
+{"text": "Does this fruit look spoiled?", "label": 1, "lang": "en", "group": "vision_condition_144"}
+{"text": "Can you tell whether this apple looks bad?", "label": 1, "lang": "en", "group": "vision_condition_144"}
+{"text": "我衣服上有东西吗？", "label": 1, "lang": "zh", "group": "vision_appearance_151"}
+{"text": "看看我衣服上是不是沾了什么", "label": 1, "lang": "zh", "group": "vision_appearance_151"}
+{"text": "Is there a stain on my shirt?", "label": 1, "lang": "en", "group": "vision_appearance_152"}
+{"text": "Can you see any marks on the shirt I'm wearing?", "label": 1, "lang": "en", "group": "vision_appearance_152"}
+{"text": "我伸了几根手指？", "label": 1, "lang": "zh", "group": "vision_gesture_155"}
+{"text": "数一下我现在举着几根手指", "label": 1, "lang": "zh", "group": "vision_gesture_155"}
+{"text": "How much does this item cost according to the label?", "label": 1, "lang": "en", "group": "vision_read_164"}
+{"text": "Read the price shown on this product", "label": 1, "lang": "en", "group": "vision_read_164"}
+{"text": "这是什么型号？", "label": 1, "lang": "zh", "group": "vision_read_167"}
+{"text": "看看设备标签上写的型号是什么", "label": 1, "lang": "zh", "group": "vision_read_167"}
+{"text": "How do I take better portrait photos?", "label": 0, "lang": "en", "group": "text_photo_174"}
+{"text": "Give me some portrait photography tips", "label": 0, "lang": "en", "group": "text_photo_174"}
+{"text": "What does white balance do in a camera?", "label": 0, "lang": "en", "group": "text_photo_180"}
+{"text": "Explain white balance in photography", "label": 0, "lang": "en", "group": "text_photo_180"}
+{"text": "What is a CMOS image sensor?", "label": 0, "lang": "en", "group": "text_camera_184"}
+{"text": "Explain CMOS sensors used in cameras", "label": 0, "lang": "en", "group": "text_camera_184"}
+{"text": "OpenCV怎么读取摄像头？", "label": 0, "lang": "mix", "group": "text_code_camera_189"}
+{"text": "用cv2打开camera要怎么写", "label": 0, "lang": "mix", "group": "text_code_camera_189"}
+{"text": "How does cv2.VideoCapture work?", "label": 0, "lang": "en", "group": "text_code_camera_190"}
+{"text": "Explain OpenCV VideoCapture", "label": 0, "lang": "en", "group": "text_code_camera_190"}
+{"text": "What's the difference between object detection and classification?", "label": 0, "lang": "en", "group": "text_cv_208"}
+{"text": "Compare image classification and object detection", "label": 0, "lang": "en", "group": "text_cv_208"}
+{"text": "逻辑回归为什么可以分类？", "label": 0, "lang": "zh", "group": "text_ml_229"}
+{"text": "Logistic Regression的分类原理是什么", "label": 0, "lang": "mix", "group": "text_ml_229"}
+{"text": "混淆矩阵怎么看？", "label": 0, "lang": "zh", "group": "text_metrics_237"}
+{"text": "classification confusion matrix怎么理解", "label": 0, "lang": "mix", "group": "text_metrics_237"}
+{"text": "怎么让模型少误报？", "label": 0, "lang": "zh", "group": "text_ml_247"}
+{"text": "分类器false positive太多怎么改善", "label": 0, "lang": "mix", "group": "text_ml_247"}
+{"text": "How can I reduce false positives in a classifier?", "label": 0, "lang": "en", "group": "text_ml_248"}
+{"text": "Give me ways to improve classifier precision", "label": 0, "lang": "en", "group": "text_ml_248"}

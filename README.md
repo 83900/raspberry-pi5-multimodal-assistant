@@ -351,6 +351,20 @@ VISION_INTENT_THREADS=2
 
 启用后，拍照决策顺序为：网页“附带画面”开关 → 明确中英文视觉关键词 → E5 分类器。分类器只处理前两项没有触发的文本，失败时安全降级为不拍照，不影响普通问答。
 
+分类头可以在 Mac 上重新训练，树莓派只负责推理：
+
+```bash
+python3 -m venv .venv-vision-train
+source .venv-vision-train/bin/activate
+python -m pip install -U pip
+python -m pip install -r model/vision_intent/requirements.txt
+python model/vision_intent/split_data.py
+python model/vision_intent/train.py
+python model/vision_intent/challenge_eval.py
+```
+
+`all.jsonl` 按 `group` 拆分，避免同一语义的不同改写同时进入训练集和测试集；`challenge_test.jsonl` 只用于独立压力测试，不参与选阈值。训练结果写入 `artifacts/vision_intent/vision_intent_head.npz`。完整的数据格式、训练原理和树莓派优化说明见 [公众号长文草稿](docs/wechat-touchscreen-vision-intent.md)。
+
 运行目录需要三个文件：
 
 ```text
