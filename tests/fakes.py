@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from types import SimpleNamespace
 
 
 class FakeAudio:
@@ -91,3 +92,14 @@ class FakeMetrics:
 
     def temperature(self):
         return 50
+
+
+class FakeVisionIntent:
+    def __init__(self, capture: bool, probability: float) -> None:
+        self.capture = capture
+        self.probability = probability
+        self.calls: list[str] = []
+
+    async def classify(self, text: str):
+        self.calls.append(text)
+        return SimpleNamespace(capture=self.capture, probability=self.probability, threshold=0.5)

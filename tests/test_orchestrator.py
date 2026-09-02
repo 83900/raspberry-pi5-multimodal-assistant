@@ -8,10 +8,10 @@ from pi_edge_assistant.models import AssistantState
 from pi_edge_assistant.orchestrator import BusyError, Orchestrator
 from pi_edge_assistant.services.media import MediaStore
 
-from fakes import FakeASR, FakeAudio, FakeCamera, FakeMetrics, FakeOllama, FakeTTS
+from fakes import FakeASR, FakeAudio, FakeCamera, FakeMetrics, FakeOllama, FakeTTS, FakeVisionIntent
 
 
-def make_orchestrator(tmp_path: Path, camera_fail: bool = False) -> Orchestrator:
+def make_orchestrator(tmp_path: Path, camera_fail: bool = False, vision_intent=None) -> Orchestrator:
     runtime = tmp_path / "run"
     runtime.mkdir(parents=True)
     return Orchestrator(
@@ -25,6 +25,7 @@ def make_orchestrator(tmp_path: Path, camera_fail: bool = False) -> Orchestrator
         history=HistoryStore(tmp_path / "history.db"),
         events=EventHub(),
         tts_enabled=True,
+        vision_intent=vision_intent,
     )
 
 
@@ -63,6 +64,30 @@ async def test_camera_failure_degrades_to_text(tmp_path: Path) -> None:
     assert record.response == "本地回复"
     assert record.error_code == "camera_unavailable"
     assert orchestrator.ollama.calls[0][1] is None
+
+
+@pytest.mark.asyncio
+async def test_classifier_can_trigger_camera_without_keyword(tmp_path: Path) -> None:
+    classifier = FakeVisionIntent(capture=True, probability=0.6864)
+    orchestrator = make_orchestrator(tmp_path, vision_intent=classifier)
+    job_id = await orchestrator.submit_chat("我手里拿的是什么？", include_image=False, compare=False)
+    await orchestrator.wait_for_job(job_id)
+
+    assert classifier.calls == ["我手里拿的是什么？"]
+    assert orchestrator.camera.calls == 1
+    assert orchestrator.history.list()[0].include_image is True
+    assert orchestrator.status.timings["vision_intent_probability"] == 0.6864
+
+
+@pytest.mark.asyncio
+async def test_explicit_checkbox_skips_classifier(tmp_path: Path) -> None:
+    classifier = FakeVisionIntent(capture=False, probability=0.1)
+    orchestrator = make_orchestrator(tmp_path, vision_intent=classifier)
+    job_id = await orchestrator.submit_chat("普通问题", include_image=True, compare=False)
+    await orchestrator.wait_for_job(job_id)
+
+    assert classifier.calls == []
+    assert orchestrator.camera.calls == 1
 
 
 @pytest.mark.asyncio

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import logging
 import time
 import uuid
 from datetime import datetime, timezone
@@ -11,6 +12,9 @@ from typing import Any
 from .database import HistoryStore
 from .events import EventHub
 from .models import AssistantState, InteractionRecord, JobResult, RuntimeStatus
+
+
+logger = logging.getLogger(__name__)
 
 
 VISION_TRIGGERS = (
@@ -55,6 +59,7 @@ class Orchestrator:
         history: HistoryStore,
         events: EventHub,
         tts_enabled: bool,
+        vision_intent: Any | None = None,
     ) -> None:
         self.audio = audio
         self.camera = camera
@@ -66,6 +71,7 @@ class Orchestrator:
         self.history = history
         self.events = events
         self.tts_enabled = tts_enabled
+        self.vision_intent = vision_intent
         self.status = RuntimeStatus(model=ollama.default_model)
         self._interaction_lock = asyncio.Lock()
         self._recording_job_id: str | None = None
@@ -205,8 +211,23 @@ class Orchestrator:
                 audio_path = None
                 await self._update(transcript=transcript, timings=timings)
 
-            include_image = bool(include_image or requests_vision(transcript))
-            await self._update(include_image=include_image)
+            if not include_image:
+                include_image = requests_vision(transcript)
+            if not include_image and self.vision_intent is not None:
+                stage = time.perf_counter()
+                try:
+                    decision = await self.vision_intent.classify(transcript)
+                    timings["vision_intent_seconds"] = round(time.perf_counter() - stage, 3)
+                    timings["vision_intent_probability"] = round(decision.probability, 4)
+                    timings["vision_intent_threshold"] = round(decision.threshold, 4)
+                    include_image = decision.capture
+                except Exception as exc:
+                    logger.warning("Vision intent classifier unavailable: %s", exc)
+                    error_code = error_code or "vision_intent_unavailable"
+                    await self.events.broadcast(
+                        {"type": "warning", "job_id": job_id, "message": "视觉意图分类器不可用，本次按文本处理"}
+                    )
+            await self._update(include_image=include_image, timings=timings)
             if include_image:
                 await self._set_state(AssistantState.CAPTURING)
                 stage = time.perf_counter()

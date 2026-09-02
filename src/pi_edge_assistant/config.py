@@ -36,6 +36,11 @@ class Settings:
     camera_width: int = 640
     camera_height: int = 480
     media_ttl_seconds: int = 600
+    vision_intent_enabled: bool = False
+    vision_intent_model_dir: Path = Path.home() / ".local/share/pi-edge-assistant/vision-intent/model"
+    vision_intent_threshold: float | None = None
+    vision_intent_threads: int = 2
+    vision_intent_timeout_seconds: float = 15.0
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -62,6 +67,18 @@ class Settings:
             camera_width=int(os.getenv("CAMERA_WIDTH", "640")),
             camera_height=int(os.getenv("CAMERA_HEIGHT", "480")),
             media_ttl_seconds=int(os.getenv("MEDIA_TTL_SECONDS", "600")),
+            vision_intent_enabled=_env_bool("VISION_INTENT_ENABLED", False),
+            vision_intent_model_dir=Path(
+                os.getenv(
+                    "VISION_INTENT_MODEL_DIR",
+                    str(Path.home() / ".local/share/pi-edge-assistant/vision-intent/model"),
+                )
+            ),
+            vision_intent_threshold=(
+                float(value) if (value := os.getenv("VISION_INTENT_THRESHOLD")) else None
+            ),
+            vision_intent_threads=int(os.getenv("VISION_INTENT_THREADS", "2")),
+            vision_intent_timeout_seconds=float(os.getenv("VISION_INTENT_TIMEOUT_SECONDS", "15")),
         )
 
     def prepare(self) -> None:

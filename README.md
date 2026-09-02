@@ -338,9 +338,63 @@ TTS_ENABLED=true
 CAMERA_WIDTH=640
 CAMERA_HEIGHT=480
 MEDIA_TTL_SECONDS=600
+VISION_INTENT_ENABLED=true
+VISION_INTENT_MODEL_DIR=/home/你的用户名/.local/share/pi-edge-assistant/vision-intent/model
+VISION_INTENT_THREADS=2
+# 默认读取分类头内的 0.50；部署时可覆盖
+# VISION_INTENT_THRESHOLD=0.60
 ```
 
 安装脚本会自动把模板里的 home 和用户 UID 替换成当前值，通常只需调整音频设备。
+
+### 可选：E5 视觉意图分类器
+
+启用后，拍照决策顺序为：网页“附带画面”开关 → 明确中英文视觉关键词 → E5 分类器。分类器只处理前两项没有触发的文本，失败时安全降级为不拍照，不影响普通问答。
+
+运行目录需要三个文件：
+
+```text
+~/.local/share/pi-edge-assistant/vision-intent/model/
+├── model.onnx
+├── tokenizer.json
+└── vision_intent_head.npz
+```
+
+本项目使用 `intfloat/multilingual-e5-small` 官方 FP32 ONNX 模型。不要在 Raspberry Pi 上使用文件名带 `avx512` 的量化版本；它针对 x86 指令集。运行时只需要 `numpy`、`onnxruntime` 和 `tokenizers`，不需要安装 Torch、Transformers、SentenceTransformers 或 scikit-learn。
+
+分类器在独立短生命周期进程中运行：冷加载约 0.6 秒，单句推理约 15 毫秒，完成后释放约 900MB 峰值内存，再进入摄像头和 Ollama 阶段。分类头内置阈值为 0.50，也可用 `VISION_INTENT_THRESHOLD` 覆盖。
+
+当前分类头在树莓派实测：原 test 集 74/74；challenge 集 200 条中准确率 91.5%、召回率 100%、精确率 85.5%，包含 17 次误拍。因此 0.50 更偏向“不漏拍”，不是高精度生产阈值。若更在意减少误拍，应重新扩充困难负样本训练，而不是只依赖调高阈值。
+
+离线复刻时先在 Mac 项目根目录下载官方文件和 Linux ARM64 wheels：
+
+```bash
+mkdir -p /tmp/pi-vision-intent/model /tmp/pi-vision-intent/wheels
+
+curl -L --fail -o /tmp/pi-vision-intent/model/model.onnx \
+  https://huggingface.co/intfloat/multilingual-e5-small/resolve/main/onnx/model.onnx
+curl -L --fail -o /tmp/pi-vision-intent/model/tokenizer.json \
+  https://huggingface.co/intfloat/multilingual-e5-small/resolve/main/onnx/tokenizer.json
+cp artifacts/vision_intent/vision_intent_head.npz /tmp/pi-vision-intent/model/
+
+python3 -m pip download --dest /tmp/pi-vision-intent/wheels \
+  --platform manylinux2014_aarch64 --python-version 311 --implementation cp \
+  --only-binary=:all: --no-deps \
+  onnxruntime==1.16.3 tokenizers==0.13.3 numpy==1.26.4 protobuf==4.25.8
+python3 -m pip download --dest /tmp/pi-vision-intent/wheels \
+  --only-binary=:all: --no-deps \
+  coloredlogs==15.0.1 flatbuffers==25.2.10 packaging==25.0 \
+  sympy==1.14.0 humanfriendly==10.0 mpmath==1.3.0
+```
+
+核对 `model.onnx` 的 SHA256 应为 `ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665`，再将 `model` 和 `wheels` 传入树莓派的 `~/.local/share/pi-edge-assistant/vision-intent/`。在树莓派现有 venv 中离线安装：
+
+```bash
+.venv/bin/pip install --no-index --no-deps \
+  ~/.local/share/pi-edge-assistant/vision-intent/wheels/*.whl
+```
+
+最后在 `~/.config/pi-edge-assistant/edge-assistant.env` 启用上述 `VISION_INTENT_*` 配置并重启用户服务。
 
 ---
 

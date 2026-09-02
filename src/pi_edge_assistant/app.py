@@ -24,6 +24,7 @@ from .services.media import MediaStore
 from .services.metrics import MetricsService
 from .services.ollama import OllamaService
 from .services.tts import PiperService
+from .services.vision_intent import VisionIntentService
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +49,16 @@ def build_orchestrator(settings: Settings) -> Orchestrator:
         history=HistoryStore(settings.data_dir / "assistant.db"),
         events=EventHub(),
         tts_enabled=settings.tts_enabled,
+        vision_intent=(
+            VisionIntentService(
+                settings.vision_intent_model_dir,
+                threshold=settings.vision_intent_threshold,
+                threads=settings.vision_intent_threads,
+                timeout_seconds=settings.vision_intent_timeout_seconds,
+            )
+            if settings.vision_intent_enabled
+            else None
+        ),
     )
 
 
@@ -65,7 +76,7 @@ def create_app(settings: Settings | None = None, orchestrator: Orchestrator | No
         await orchestrator.shutdown()
         orchestrator.history.close()
 
-    app = FastAPI(title="Pi Edge Assistant", version="0.3.0", lifespan=lifespan)
+    app = FastAPI(title="Pi Edge Assistant", version="0.4.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.orchestrator = orchestrator
 
